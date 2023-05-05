@@ -25,7 +25,7 @@ pipeline {
 //                         }
 //                         withCredentials([usernamePassword(credentialsId: 'Dockerhub', usernameVariable: 'DOCKERHUB_USER', passwordVariable: 'DOCKERHUB_PASS')]) {
 //     sh "sudo -- sh -c 'echo $DOCKERHUB_PASS | docker login -u nagasumukh --password-stdin'"
-}
+//}
 
                         sh 'echo ${BUILD_TIMESTAMP}'
 
