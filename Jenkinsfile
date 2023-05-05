@@ -13,7 +13,7 @@ pipeline {
                 steps {
                     script {
                         sh 'rm -rf *.war'
-                        sh 'jar -cvf backend.war -C src/main/webapp/ .'
+                        sh 'jar -cvf backend.war .'
                         sh 'echo ${BUILD_TIMESTAMP}'
 
                         docker.withRegistry('',registryCredential){
