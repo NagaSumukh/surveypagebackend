@@ -16,9 +16,12 @@ pipeline {
                         sh 'jar -cvf backend.war .'
                         sh 'echo ${BUILD_TIMESTAMP}'
                         
-                        sh "sudo docker login -u nagasumukh -p ${DOCKERHUB_PASS}"
-                        sh 'docker build -t nagasumukh/backend:${env.TIMESTAMP} .'
-                 
+//                         sh "docker login -u nagasumukh -p ${DOCKERHUB_PASS}"
+//                         sh 'docker build -t nagasumukh/backend:${env.TIMESTAMP} .'
+                         
+                        docker.withRegistry('',registryCredential){
+                            def customImage = docker.build("nagasumukh/backend:${env.TIMESTAMP}")
+                        }
 
                         sh 'echo ${BUILD_TIMESTAMP}'
 
