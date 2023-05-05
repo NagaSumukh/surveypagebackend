@@ -16,7 +16,7 @@ pipeline {
                         sh 'jar -cvf backend.war .'
                         sh 'echo ${BUILD_TIMESTAMP}'
                         
-                         sh "sudo -- sh -c 'echo $DOCKERHUB_PASS | docker login -u nagasumukh --password-stdin'"
+                         sh "echo $DOCKERHUB_PASS | sudo -S -- sh -c 'docker login -u nagasumukh --password-stdin'"
                          sh 'docker build -t nagasumukh/backend:${env.TIMESTAMP} .'
                          
 //                         docker.withRegistry('',registryCredential){
