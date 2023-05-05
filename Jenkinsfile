@@ -2,8 +2,7 @@ pipeline {
     environment {
         registry = "nagasumukh/backend"
         registryCredential = 'Dockerhub'
-        DOCKERHUB_USER = credentials('Dockerhub').username
-        DOCKERHUB_PASS = credentials('Dockerhub').password
+        DOCKERHUB_PASS = credentials('Dockerhub')
         TIMESTAMP = new Date().format("yyyyMMdd_HHmmss")
     }
     agent any
