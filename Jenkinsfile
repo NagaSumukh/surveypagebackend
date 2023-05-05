@@ -1,6 +1,6 @@
 pipeline {
     environment {
-        registry = "nagasumukh/newestimg"
+        registry = "nagasumukh/backend"
         registryCredential = 'Dockerhub'
         DOCKERHUB_PASS = credentials('Dockerhub')
         TIMESTAMP = new Date().format("yyyyMMdd_HHmmss")
@@ -13,11 +13,11 @@ pipeline {
                 steps {
                     script {
                         sh 'rm -rf *.war'
-                        sh 'jar -cvf Project1-SWE.war -C src/main/webapp/ .'
+                        sh 'jar -cvf backend.war -C src/main/webapp/ .'
                         sh 'echo ${BUILD_TIMESTAMP}'
 
                         docker.withRegistry('',registryCredential){
-                            def customImage = docker.build("nagasumukh/newestimg:${env.TIMESTAMP}")
+                            def customImage = docker.build("nagasumukh/backend:${env.TIMESTAMP}")
                         }
 
 
@@ -33,7 +33,7 @@ pipeline {
                 steps {
                     script {
                         docker.withRegistry('',registryCredential){
-                          sh "docker push nagasumukh/newestimg:${env.TIMESTAMP}"
+                          sh "docker push nagasumukh/backend:${env.TIMESTAMP}"
                        }
 //                         sh 'docker push nagasumukh/newestimg:${env.TIMESTAMP}'
                     }
@@ -43,7 +43,7 @@ pipeline {
           stage('Deploying Rancher to single node') {
              steps {
                 script{
-                    sh "kubectl set image deployment/deploymain container-0=nagasumukh/newestimg:${env.TIMESTAMP}"
+                    sh "kubectl set image deployment/deploynp container-0=nagasumukh/backend:${env.TIMESTAMP}"
 //                    sh 'kubectl set image deployment/deploymain container-0=nagasumukh/newestimg:${env.TIMESTAMP}'
                 }
              }
@@ -52,7 +52,7 @@ pipeline {
         stage('Deploying Rancher to Load Balancer') {
            steps {
               script{
-                  sh "kubectl set image deployment/deploylb container-0=nagasumukh/newestimg:${env.TIMESTAMP}"
+                  sh "kubectl set image deployment/deploylb container-0=nagasumukh/backend:${env.TIMESTAMP}"
 //                  sh 'kubectl set image deployment/deploylb container-0=nagasumukh/newestimg:${env.TIMESTAMP}'
               }
            }
