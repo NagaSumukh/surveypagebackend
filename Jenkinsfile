@@ -17,14 +17,14 @@ pipeline {
                         sh 'jar -cvf backend.war .'
                         sh 'echo ${BUILD_TIMESTAMP}'
                         
-//                         sh "docker login -u nagasumukh -p ${DOCKERHUB_PASS}"
-//                         sh 'docker build -t nagasumukh/backend:${env.TIMESTAMP} .'
+                         sh "sudo -- sh -c 'echo $DOCKERHUB_PASS | docker login -u nagasumukh --password-stdin'"
+                         sh 'docker build -t nagasumukh/backend:${env.TIMESTAMP} .'
                          
 //                         docker.withRegistry('',registryCredential){
 //                             def customImage = docker.build("nagasumukh/backend:${env.TIMESTAMP}")
 //                         }
-                        withCredentials([usernamePassword(credentialsId: 'Dockerhub', usernameVariable: 'DOCKERHUB_USER', passwordVariable: 'DOCKERHUB_PASS')]) {
-    sh "sudo -- sh -c 'echo $DOCKERHUB_PASS | docker login -u $DOCKERHUB_USER --password-stdin'"
+//                         withCredentials([usernamePassword(credentialsId: 'Dockerhub', usernameVariable: 'DOCKERHUB_USER', passwordVariable: 'DOCKERHUB_PASS')]) {
+//     sh "sudo -- sh -c 'echo $DOCKERHUB_PASS | docker login -u nagasumukh --password-stdin'"
 }
 
                         sh 'echo ${BUILD_TIMESTAMP}'
