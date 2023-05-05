@@ -20,7 +20,7 @@ pipeline {
                             def customImage = docker.build("nagasumukh/backend:${env.TIMESTAMP}")
                         }
 
-
+                        sh 'echo 2 ${BUILD_TIMESTAMP}'
 
 //                         sh "docker login -u Nagasumukh -p ${DOCKERHUB_PASS}"
 //                         def customImage = docker.build("nagasumukh/newestimg:${env.TIMESTAMP}")
