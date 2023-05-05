@@ -2,7 +2,6 @@ pipeline {
     environment {
         registry = "nagasumukh/backend"
         registryCredential = 'Dockerhub'
-        DOCKERHUB_PASS = credentials('Dockerhub')
         DOCKERHUB_USER = credentials('Dockerhub').username
         DOCKERHUB_PASS = credentials('Dockerhub').password
         TIMESTAMP = new Date().format("yyyyMMdd_HHmmss")
