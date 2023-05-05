@@ -3,6 +3,8 @@ pipeline {
         registry = "nagasumukh/backend"
         registryCredential = 'Dockerhub'
         DOCKERHUB_PASS = credentials('Dockerhub')
+        DOCKERHUB_USER = credentials('Dockerhub').username
+        DOCKERHUB_PASS = credentials('Dockerhub').password
         TIMESTAMP = new Date().format("yyyyMMdd_HHmmss")
     }
     agent any
@@ -19,9 +21,12 @@ pipeline {
 //                         sh "docker login -u nagasumukh -p ${DOCKERHUB_PASS}"
 //                         sh 'docker build -t nagasumukh/backend:${env.TIMESTAMP} .'
                          
-                        docker.withRegistry('',registryCredential){
-                            def customImage = docker.build("nagasumukh/backend:${env.TIMESTAMP}")
-                        }
+//                         docker.withRegistry('',registryCredential){
+//                             def customImage = docker.build("nagasumukh/backend:${env.TIMESTAMP}")
+//                         }
+                        withCredentials([usernamePassword(credentialsId: 'Dockerhub', usernameVariable: 'DOCKERHUB_USER', passwordVariable: 'DOCKERHUB_PASS')]) {
+    sh "sudo -- sh -c 'echo $DOCKERHUB_PASS | docker login -u $DOCKERHUB_USER --password-stdin'"
+}
 
                         sh 'echo ${BUILD_TIMESTAMP}'
 
