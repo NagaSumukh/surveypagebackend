@@ -16,7 +16,7 @@ pipeline {
                         sh 'jar -cvf backend.war .'
                         sh 'echo ${BUILD_TIMESTAMP}'
                         
-                        sh "docker login -u nagasumukh -p ${DOCKERHUB_PASS}"
+                        sh "sudo docker login -u nagasumukh -p ${DOCKERHUB_PASS}"
                         sh 'docker build -t nagasumukh/backend:${env.TIMESTAMP} .'
                  
 
