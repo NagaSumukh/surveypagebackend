@@ -1,7 +1,7 @@
 # surveypagebackend
 Video of the demo : [Link to video] (https://gmuedu-my.sharepoint.com/:v:/g/personal/nhunsurd_gmu_edu/ETWmEQt1tVJGrzY3sw70N_IBD7eW5WTCYt0CQ2Uerdktjw?e=GVlUYi)
 </br>
-Detailed explanation on this [Page] (https://github.com/NagaSumukh/SurveyPage/blob/main/SWE%20-%20645%20Assignment%202.pdf)
+Detailed explanation on this [Page] (https://github.com/NagaSumukh/surveypagebackend/blob/main/SWE%20-%20645%20Assignment%203.pdf)
 </br>
 AWS URL of home page: [AWS URL] (https://3.223.167.126/k8s/clusters/c-m-s7478tdz/api/v1/namespaces/default/services/http:deploynp:8080/proxy/surveys/all)
 
